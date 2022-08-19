@@ -1,1 +1,1 @@
-# neural_network_studies
+# Neural Network Studies
