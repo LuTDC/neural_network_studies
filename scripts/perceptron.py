@@ -43,7 +43,7 @@ test = np.array([[-0.3665, 0.0620, 5.9891],
         [-0.6920, 0.9404, 4.4058],
         [-1.3970, 0.7141, 4.9263],
         [-1.8842, -0.2805, 1.2548]])
-y = np.zeros(10)
+y = np.zeros(n_test)
 
 rate = 0.3
 times = 0
@@ -52,15 +52,16 @@ def training(weights):
     global train, rate, n_train, times
     flag = False
 
-    while not flag and times <= 1000000:
+    while not flag:
         flag = True
 
         for i in range(n_train):
             sum = 0
-            for j in range(3):
-                sum = sum + train[i, j] * weights[j + 1]
-
-            sum = sum - weights[0]
+            for j in range(4):
+                if j == 0:
+                    sum = sum + (-1) * weights[j]
+                else:
+                    sum = sum + train[i, j - 1] * weights[j]
 
             if sum >= 0: sum = 1
             else: sum = -1
@@ -81,10 +82,11 @@ def testing(weights):
 
     sum = 0
     for i in range(n_test):
-        for j in range(3):
-            sum = sum + test[i, j] * weights[j+1]
-
-        sum = sum - weights[0]
+        for j in range(4):
+            if j == 0:
+                sum = sum + (-1) * weights[j]
+            else:
+                sum = sum + test[i, j - 1] * weights[j]
 
         if sum >= 0: y[i] = 1
         else: y[i] = -1
