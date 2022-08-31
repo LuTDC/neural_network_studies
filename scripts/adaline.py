@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 n_train = 35
 n_test = 15
 
+nx = 4
+
 train = np.array([[0.4329, -1.3719, 0.7022, -0.8535, 1],
                   [0.3024, 0.2286, 0.8630, 2.7909, -1],
                   [0.1349, -0.6445, 1.0530, 0.5687, -1],
@@ -60,14 +62,14 @@ rate = 0.0025
 e = 0.000001
 
 def eqm(weights):
-    global n_train, train
+    global n_train, train, nx
 
     result = 0
 
     for i in range(n_train):
 
         sum = 0
-        for j in range(5):
+        for j in range(nx + 1):
             if j == 0:
                 sum = sum + (-1) * weights[j]
             else:
@@ -80,7 +82,7 @@ def eqm(weights):
     return result
 
 def training(weights, eqm_list):
-    global e, train, rate, n_train, times
+    global e, train, rate, n_train, times, nx
 
     previous_eqm = eqm(weights)
     current_eqm = 0
@@ -92,7 +94,7 @@ def training(weights, eqm_list):
         for i in range(n_train):
 
             sum = 0
-            for j in range(5):
+            for j in range(nx + 1):
                 if j == 0:
                     sum = sum + (-1) * weights[j]
                 else:
@@ -108,12 +110,12 @@ def training(weights, eqm_list):
         current_eqm = eqm(weights)
 
 def testing(weights):
-    global test, y
+    global test, y, nx
 
     for i in range(n_test):
 
         sum = 0
-        for j in range(5):
+        for j in range(nx + 1):
             if j == 0:
                 sum = sum + (-1) * weights[j]
             else:
@@ -125,27 +127,35 @@ def testing(weights):
             y[i] = -1
 
 for t in range(5):
+    print("T", t+1)
+    print("\n")
+
     times = 0
 
     eqm_list = []
     times_list = []
 
-    weights = np.random.uniform(0, 1, 5)
+    weights = np.random.uniform(0, 1, nx + 1)
     print("Original weights: ", weights)
+    print("\n")
 
     training(weights, eqm_list)
 
     print("Final weights: ", weights)
+    print("\n")
     print("Times: ", times - 1)
+    print("\n")
 
     testing(weights)
 
     print("Results: ", y)
+    print("\n")
+    print("\n")
 
     for i in range(times):
         times_list.append(i)
 
-    plt.plot(eqm_list, times_list)
-    plt.xlabel('EQM')
-    plt.ylabel('Times')
+    plt.plot(times_list, eqm_list)
+    plt.xlabel('Times')
+    plt.ylabel('EQM')
     plt.show()

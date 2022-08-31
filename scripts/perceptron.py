@@ -3,6 +3,10 @@ import numpy as np
 n_train = 30
 n_test = 10
 
+rate = 0.3
+
+nx = 3
+
 train = np.array([[-0.6508, 0.1097, 4.0009, -1],
                   [-1.4492, 0.8896, 4.4005, -1],
                   [2.0850, 0.6876, 12.0710, -1],
@@ -45,8 +49,6 @@ test = np.array([[-0.3665, 0.0620, 5.9891],
         [-1.8842, -0.2805, 1.2548]])
 y = np.zeros(n_test)
 
-rate = 0.3
-times = 0
 
 def training(weights):
     global train, rate, n_train, times
@@ -57,7 +59,7 @@ def training(weights):
 
         for i in range(n_train):
             sum = 0
-            for j in range(4):
+            for j in range(nx + 1):
                 if j == 0:
                     sum = sum + (-1) * weights[j]
                 else:
@@ -69,7 +71,7 @@ def training(weights):
             if sum != train[i, 3]:
                 flag = False
 
-                for j in range(4):
+                for j in range(nx + 1):
                     if j == 0:
                         weights[j] = weights[j] + rate * (train[i, 3] - sum) * -1
                     else:
@@ -82,7 +84,7 @@ def testing(weights):
 
     sum = 0
     for i in range(n_test):
-        for j in range(4):
+        for j in range(nx + 1):
             if j == 0:
                 sum = sum + (-1) * weights[j]
             else:
@@ -92,16 +94,24 @@ def testing(weights):
         else: y[i] = -1
 
 for t in range(5):
+    print("T", t+1)
+    print("\n")
+
     times = 0
 
-    weights = np.random.uniform(0, 1, 4)
+    weights = np.random.uniform(0, 1, nx + 1)
     print("Original weights: ", weights)
+    print("\n")
 
     training(weights)
 
     print("Final weights: ", weights)
+    print("\n")
     print("Times: ", times-1)
+    print("\n")
 
     testing(weights)
 
     print("Results: ", y)
+    print("\n")
+    print("\n")
