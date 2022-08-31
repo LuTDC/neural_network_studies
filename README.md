@@ -2,7 +2,7 @@
 
 Implementation based on the book "Redes Neurais Artificiais para Engenharia e Ciências Aplicadas" by Ivan Nunes da Silva, Danilo Hernane Spatti and Rogério Andrade Flauzino.
 
-#1 Perceptron - Practice Activity, Chapter 3 - Rede Perceptron, page 70
+#1 Perceptron - Practice Activity, Chapter 3 - Rede Perceptron, page 70 <br>
 #2 Adaline - Practice Activity, Chapter 4 - Rede Adaline e Regra Delta, page 87
 #3 MLP for function approximation - Practice Activity, Chapter 5 - Rede Perceptron multicamadas, page 164
 #4 MLP for classification - Practice Activity, Chapter 5 - Rede Perceptron multicamadas, page 166
