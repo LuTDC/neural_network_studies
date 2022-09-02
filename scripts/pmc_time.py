@@ -37,7 +37,7 @@ def eqm(weights1, weights2):
         for j in range(n1):
             for k in range(p + 1):
                 if k == 0: l1[j] = l1[j] + weights1[j, k] * -1
-                else: l1[j] = l1[j] + weights1[j, k] * y2[i + k - 1]
+                else: l1[j] = l1[j] + weights1[j, k] * train[i + k - 1]
 
             y1[j] = 1/(1 + np.exp(-l1[j]))
 
@@ -47,7 +47,7 @@ def eqm(weights1, weights2):
 
         y2[i + p] = 1/(1 + np.exp(-l2))
 
-        errors[i] = np.power((train[i + p] - y2[i + p]), 2) / 2
+        errors[i] = np.power((train[i + p] - y2[i + p]), 2)
 
     result = np.sum(errors) / (n_train - p)
 
@@ -62,7 +62,7 @@ def training(weights1, weights2, eqm_list):
     previous_weights1 = np.copy(weights1)
     previous_weights2 = np.copy(weights2)
 
-    while np.absolute(current_eqm - previous_eqm) > e:
+    while np.absolute(current_eqm - previous_eqm) > e and times <= 50000:
         previous_eqm = eqm(weights1, weights2)
         eqm_list.append(previous_eqm)
 
@@ -80,7 +80,7 @@ def training(weights1, weights2, eqm_list):
             for j in range(n1):
                 for k in range(p + 1):
                     if k == 0: l1[j] = l1[j] + weights1[j, k] * -1
-                    else: l1[j] = l1[j] + weights1[j, k] * y2[i + k - 1]
+                    else: l1[j] = l1[j] + weights1[j, k] * train[i + k - 1]
 
                 y1[j] = 1 / (1 + np.exp(-l1[j]))
 
@@ -106,7 +106,7 @@ def training(weights1, weights2, eqm_list):
             for j in range(n1):
                 correct_rate1[j] = correct_rate1[j] + correct_rate2 * weights2[j + 1]
 
-                correct_rate1[j] = -correct_rate1[j] * (y1[j] * (1 - y1[j]))
+                correct_rate1[j] = correct_rate1[j] * (y1[j] * (1 - y1[j])) * -1
 
             for j in range(n1):
                 for k in range(p + 1):

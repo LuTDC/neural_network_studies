@@ -177,9 +177,6 @@ def training():
                 if j == 0: y2 = y2 + weights2[j] * -1
                 else: y2 = y2 + weights2[j] * y1[i, j - 1]
 
-            #if y2 >= 0: y2 = 1
-            #else: y2 = -1
-
             correct_rate = train[i, nx] - y2
 
             for j in range(n1 + 1):
