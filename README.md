@@ -8,4 +8,5 @@ Implementation based on the book "Redes Neurais Artificiais para Engenharia e Ci
 #4 MLP for classification - Practice Activity, Chapter 5 - Rede Perceptron multicamadas, page 166 <br>
 #5 MLP for time series forecasting - Practice Activity, Chapter 5 - Rede Perceptron multicamadas, page 169 (doesn't work) <br>
 #6 RBF for classification - Practice Activity, Chapter 6 - Redes de funções de base radial (RBF), page 191 <br>
-#7 RBF for function approximation - Practice Activity, Chapter 6 - Redes de funções de base radial (RBF), page 194 
+#7 RBF for function approximation - Practice Activity, Chapter 6 - Redes de funções de base radial (RBF), page 194 <br>
+#8 Hopfield Network - Practice Activity, Chapter 7 - Redes Recorrentes de Hopfield, page 218
