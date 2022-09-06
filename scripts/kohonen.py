@@ -147,12 +147,9 @@ def training():
     global n_train, train, rate, n1, nx, weights, neighbours, neighbours_count,classes
 
     times = 0
-    previous_weights = np.zeros((n1, nx))
-
     change = 1
 
-    while change > change_rate and times <= 10000:
-        previous_weights = np.copy(weights)
+    while change > change_rate:
         change = 0
 
         for i in range(n_train):
@@ -176,14 +173,12 @@ def training():
             else: classes[min_j] = 3
 
             for j in range(nx):
+                change = change + rate * (train[i, j] - weights[min_j, j])
                 weights[min_j, j] = weights[min_j, j] + rate * (train[i, j] - weights[min_j, j])
 
-                change = change + rate * (train[i, j] - weights[min_j, j])
-
                 for k in range(int(neighbours_count[min_j])):
+                    change = change + (rate / 2) * (train[i, j] - weights[int(neighbours[min_j, k]), j])
                     weights[int(neighbours[min_j, k]), j] = weights[int(neighbours[min_j, k]), j] + (rate / 2) * (train[i, j] - weights[int(neighbours[min_j, k]), j])
-
-                    change = change + rate * (train[i, j] - weights[min_j, j])
 
             sum_min_j = 0
             for j in range(nx):
